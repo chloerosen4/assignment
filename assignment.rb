@@ -1,16 +1,19 @@
 def calcMinProcessors(start_times, end_times) 
-  total_active = []
   checks = start_times.concat(end_times).sort.uniq
-  #puts "checks #{checks}"
   active = 0
+  max_active = 0
   checks.each do |minute|
     if start_times.include?(minute)
       active += 1
-    elseif end_times.include?(minute)
+    end
+    if active > max_active
+      max_active = active
+    end
+    if end_times.include?(minute)
       active -= 1
     end
   end
-  return active
+  rezturn max_active
 end
 
 start_times = [910, 952, 1000, 1115, 1510, 1820]
